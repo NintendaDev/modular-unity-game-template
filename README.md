@@ -1,4 +1,4 @@
-# K-Syndicate Modular Unity Game Template
+# Modular Unity Game Template
 
 This project is based on the following key ideas:
 - Controlled game loading
