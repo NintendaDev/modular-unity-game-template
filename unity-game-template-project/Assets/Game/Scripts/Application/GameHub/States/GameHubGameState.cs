@@ -17,7 +17,7 @@ namespace Game.Application.GameHub
 
         public GameHubGameState(GameStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem, 
             ILoadingCurtain loadingCurtain, ISingleSceneLoader singleSceneLoader, 
-            IFastLoadInitialize levelLoaderInitializer, GameLoadingAssetsConfiguration gameLoadingAssetsConfiguration)
+            GameLoadingAssetsConfiguration gameLoadingAssetsConfiguration)
             : base(stateMachine, signalBus, logSystem)
         {
             _loadingCurtain = loadingCurtain;

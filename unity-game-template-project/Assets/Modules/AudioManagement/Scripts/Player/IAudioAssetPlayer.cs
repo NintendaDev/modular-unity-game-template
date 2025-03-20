@@ -8,7 +8,7 @@ namespace Modules.AudioManagement.Player
     {
         public bool IsInitialized { get; }
         
-        public void Initialize();
+        public UniTask InitializeAsync();
 
         public UniTask WarmupAsync(params AudioCode[] audioCodes);
 

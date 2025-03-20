@@ -19,10 +19,11 @@ namespace Game.Gameplay.States
         public void Initialize()
         {
             _sceneStateMachine.RegisterState(_statesFactory.Create<BootstrapSceneState>());
-            _sceneStateMachine.RegisterState(_statesFactory.Create<StartGameplaySceneState>());
-            _sceneStateMachine.RegisterState(_statesFactory.Create<PlayGameplaySceneState>());
-            _sceneStateMachine.RegisterState(_statesFactory.Create<PauseGameplaySceneState>());
-            _sceneStateMachine.RegisterState(_statesFactory.Create<FinishGameplaySceneState>());
+            _sceneStateMachine.RegisterState(_statesFactory.Create<StartSceneState>());
+            _sceneStateMachine.RegisterState(_statesFactory.Create<PlaySceneState>());
+            _sceneStateMachine.RegisterState(_statesFactory.Create<PauseSceneState>());
+            _sceneStateMachine.RegisterState(_statesFactory.Create<GameOverSceneState>());
+            _sceneStateMachine.RegisterState(_statesFactory.Create<FinishSceneState>());
 
             _sceneStateMachine.SwitchState<BootstrapSceneState>().Forget();
         }

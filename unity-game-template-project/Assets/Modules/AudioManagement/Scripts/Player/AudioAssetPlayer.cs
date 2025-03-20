@@ -29,14 +29,15 @@ namespace Modules.AudioManagement.Player
                 StopAll();
             
             _soundEventsRegistry.Dispose();
+            IsInitialized = false;
         }
 
-        public void Initialize()
+        public async UniTask InitializeAsync()
         {
             if (IsInitialized)
                 return;
             
-            _soundEventsRegistry.Initialize();
+            await  _soundEventsRegistry.InitializeAsync();
             _soundManager = Object.FindObjectOfType<SoundManager>();
 
             if (_soundManager == null)

@@ -15,12 +15,7 @@ MonoBehaviour:
   _levelCode: 1
   _title: First Level
   _scene:
-    m_AssetGUID: 7b2141aa68b14ba469abc122e8b47358
+    m_AssetGUID: e7d1bc14acb48439fa7885467f8902c4
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _audioReference:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+    m_EditorAssetChanged: 1

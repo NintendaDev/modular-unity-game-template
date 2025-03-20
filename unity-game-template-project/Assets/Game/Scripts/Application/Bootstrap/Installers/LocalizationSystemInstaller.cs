@@ -1,4 +1,5 @@
 ﻿using Modules.Localization.Core.Detectors;
+using Modules.Localization.Core.Types;
 using Modules.Localization.I2System;
 using Zenject;
 
@@ -8,7 +9,10 @@ namespace Game.Application.Bootstrap
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<UnityLanguageDetector>().AsSingle();
+            Container.BindInterfacesTo<ConstantLanguageDetector>()
+                .AsSingle()
+                .WithArguments(Language.English);
+            
             Container.BindInterfacesTo<I2LocalizationSystem>().AsSingle();
         }
     }

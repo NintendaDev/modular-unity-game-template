@@ -28,7 +28,7 @@ namespace Game.Application.GameHub
 
         private async UniTask InitializeAudioAssetPlayer()
         {
-            _audioAssetPlayer.Initialize();
+            await _audioAssetPlayer.InitializeAsync();
             await _audioAssetPlayer.WarmupAsync(AudioCode.GameHubMusic);
         }
     }

@@ -6,6 +6,13 @@
         GameHubMusic,
         LevelMusic,
         ButtonClick,
-        ButtonHighlight
+        ButtonHighlight,
+        TakeDamagePlayer,
+        Jump,
+        Toss,
+        Push,
+        Lava,
+        Trampoline,
+        TakeDamageEnemy,
     }
 }

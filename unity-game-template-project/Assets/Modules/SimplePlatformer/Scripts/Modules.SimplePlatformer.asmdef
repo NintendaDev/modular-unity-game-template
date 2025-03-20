@@ -1,0 +1,23 @@
+{
+    "name": "Modules.SimplePlatformer",
+    "rootNamespace": "Modules.SimplePlatformer",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:2035a98caa974cc42abcb5d5d406783e",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:f28d430ef9dd60644af15e051a867632",
+        "GUID:a1394e044482765449ce7a4bd4fd2869",
+        "GUID:bbb6e066687a1ad458f3e1298314d676",
+        "GUID:1a274d617ab3c8d4c89552c116f7c2de"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

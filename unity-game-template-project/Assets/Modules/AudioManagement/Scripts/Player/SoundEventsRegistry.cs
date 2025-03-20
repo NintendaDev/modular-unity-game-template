@@ -28,10 +28,15 @@ namespace Modules.AudioManagement.Player
         {
             ReleaseSounds();
         }
+        
+        public bool IsInitialized { get; private set; }
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
             _soundConfiguration = _staticDataService.GetConfiguration<SoundConfiguration>();
+            IsInitialized = true;
+            
+            return UniTask.CompletedTask;
         }
         
         public bool IsExistSoundEvent(AudioCode soundCode, out SoundEvent soundEvent) =>
@@ -39,6 +44,9 @@ namespace Modules.AudioManagement.Player
 
         public async UniTask<bool> TryLoadAudioAsync(AudioCode audioCode)
         {
+            if (IsInitialized == false)
+                return false;
+            
             if (_loadedSoundReferences.ContainsKey(audioCode))
                 return true;
             

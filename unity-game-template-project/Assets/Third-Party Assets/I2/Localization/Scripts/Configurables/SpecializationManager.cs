@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 #if ENABLE_INPUT_SYSTEM 
-    using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 #endif
 
 namespace I2.Loc
