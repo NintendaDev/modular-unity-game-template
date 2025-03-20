@@ -19,6 +19,14 @@ namespace Modules.Analytics.Configurations
         [ValidateInput(nameof(IsUniqueEventData))]
         [SerializeField] private List<CustomAnalyticsEvent> _customEvents;
 
+        public bool IsSentOnce(AnalyticsEventCode eventCode)
+        {
+            CustomAnalyticsEvent customAnalyticsEvent = _customEvents
+                .FirstOrDefault(x => x.EventCode == eventCode);
+            
+            return customAnalyticsEvent?.IsSetOnce ?? false;
+        }
+
         public bool IsExistEventName(AnalyticsEventCode eventCode, AnalyticsSystemCode analyticsSystemCode, 
             out string eventName)
         {

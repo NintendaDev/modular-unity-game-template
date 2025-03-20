@@ -11,14 +11,18 @@ namespace Modules.Analytics.Configurations
     public sealed class CustomAnalyticsEvent : ScriptableObject
     {
         [ValidateInput(nameof(IsNotNoneEventCode))]
-        [SerializeField] public AnalyticsEventCode _eventCode;
+        [SerializeField] private AnalyticsEventCode _eventCode;
+        
+        [SerializeField] private bool _isSentOnce;
 
         [Required, SerializeField] private string _defaultName;
 
         [ValidateInput(nameof(IsUniqueEventName))] 
-        [SerializeField] public List<CustomEventName> _eventNames;
+        [SerializeField] private List<CustomEventName> _eventNames;
 
         public AnalyticsEventCode EventCode => _eventCode;
+        
+        public bool IsSetOnce => _isSentOnce;
 
         public string GetEventName(AnalyticsSystemCode analyticsSystemCode)
         {

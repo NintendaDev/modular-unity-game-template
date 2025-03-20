@@ -6,6 +6,7 @@ using Modules.Analytics.Types;
 using Modules.AssetsManagement.StaticData;
 using Modules.Logging;
 using Modules.Advertisements.Types;
+using Modules.Text;
 using Modules.Wallet.Types;
 
 namespace Modules.Analytics
@@ -14,6 +15,7 @@ namespace Modules.Analytics
     {
         private readonly StringBuilder _builder = new();
         private readonly IStaticDataService _staticDataService;
+        private readonly HashSet<AnalyticsEventCode> _sendedEventsCodes = new();
         private CustomAnalyticsEventsHub _hub;
 
         public AnalyticsSystem(ILogSystem logSystem, IStaticDataService staticDataService)
@@ -35,17 +37,55 @@ namespace Modules.Analytics
             return UniTask.CompletedTask;
         }
 
-        public abstract void SendCustomEvent(AnalyticsEventCode eventCode);
+        public bool CanSendEvent(AnalyticsEventCode eventCode)
+        {
+            if (_sendedEventsCodes.Contains(eventCode) == false)
+                return true;
 
-        public abstract void SendCustomEvent(AnalyticsEventCode eventCode, Dictionary<string, object> data);
+            if (_hub.IsSentOnce(eventCode) == false)
+                return true;
+
+            return false;
+        }
+
+        public abstract void SendCustomEvent(string eventName);
         
-        public abstract void SendCustomEvent(AnalyticsEventCode eventCode, float value);
+        public abstract void SendCustomEvent(string eventName, Dictionary<string, object> data);
+        
+        public abstract void SendCustomEvent(string eventName, float value);
+
+        public void SendCustomEvent(AnalyticsEventCode eventCode)
+        {
+            if (CanSendEvent(eventCode) == false)
+                return;
+                
+            _sendedEventsCodes.Add(eventCode);
+            SendCustomEventInternal(eventCode);
+        }
+
+        public void SendCustomEvent(AnalyticsEventCode eventCode, Dictionary<string, object> data)
+        {
+            if (CanSendEvent(eventCode) == false)
+                return;
+                
+            _sendedEventsCodes.Add(eventCode);
+            SendCustomEventInternal(eventCode, data);
+        }
+
+        public void SendCustomEvent(AnalyticsEventCode eventCode, float value)
+        {
+            if (CanSendEvent(eventCode) == false)
+                return;
+                
+            _sendedEventsCodes.Add(eventCode);
+            SendCustomEventInternal(eventCode, value);
+        }
 
         public abstract void SendInterstitialEvent(AdvertisementAction advertisementAction,
-            AdvertisementPlacement placement, AdvertisementsPlatform platform);
+            AdvertisementPlacement placement, AdvertisementsSystemType systemType);
 
         public abstract void SendRewardEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform platform);
+            AdvertisementsSystemType systemType);
         
         public abstract void SendErrorEvent(LogLevel logLevel, string message);
 
@@ -53,26 +93,61 @@ namespace Modules.Analytics
 
         public abstract void SendProgressEvent(ProgressStatus progressStatus, string levelType, string levelName,
             int progressPercent);
+        
+        protected abstract void SendCustomEventInternal(AnalyticsEventCode eventCode);
+        
+        protected abstract void SendCustomEventInternal(AnalyticsEventCode eventCode, Dictionary<string, object> data);
+        
+        protected abstract void SendCustomEventInternal(AnalyticsEventCode eventCode, float value);
 
-        protected bool IsExistEventName(AnalyticsEventCode eventCode, AnalyticsSystemCode analyticsSystemCode,
+        protected bool IsExistEvent(AnalyticsEventCode eventCode, AnalyticsSystemCode analyticsSystemCode,
             out string eventName)
         {
             bool isExist = _hub.IsExistEventName(eventCode, analyticsSystemCode, out eventName);
-            
+
             if (isExist == false)
+            {
                 LogSystem.LogWarning($"The metric name for analyticsSystemCode={analyticsSystemCode} " +
                                      $"and eventCode={eventCode} was not found.");
+            }
 
             return isExist;
         }
 
-        protected void LogEvent(AnalyticsEventCode eventCode)
+        protected string ConvertToSnakeCase(string parameterName) => parameterName.ToSnakeCase();
+
+        protected void LogEvent(AnalyticsEventCode eventCode) => LogEvent(eventCode.ToString());
+        
+        protected void LogEvent(string eventName)
         {
             _builder.Clear();
             
             _builder.Append($"Custom event have been sent: ");
-            _builder.Append($"eventCode={eventCode}");
+            _builder.Append($"eventCode={eventName}");
             LogSystem.Log(_builder.ToString());
+        }
+        
+        protected void LogEvent(string eventName, float value)
+        {
+            _builder.Clear();
+            
+            _builder.Append($"Custom event have been sent: ");
+            _builder.Append($"eventCode={eventName}, ");
+            _builder.Append($"value={value}");
+            LogSystem.Log(_builder.ToString());
+        }
+        
+        protected void LogEvent(string eventName, Dictionary<string, object> data)
+        {
+            _builder.Clear();
+            
+            _builder.Append($"Custom event have been sent: ");
+            _builder.Append($"eventCode={eventName}. Parameters: ");
+            
+            foreach (KeyValuePair<string, object> pair in data)
+                _builder.Append($"{pair.Key}={pair.Value}, ");
+            
+            LogSystem.Log(_builder.ToString().Trim(','));
         }
         
         protected void LogEvent(LogLevel logLevel, string message)
@@ -86,14 +161,14 @@ namespace Modules.Analytics
         }
         
         protected void LogEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform platform)
+            AdvertisementsSystemType systemType)
         {
             _builder.Clear();
 
             _builder.Append("Advertisement statistics have been sent: ");
-            _builder.Append($"{nameof(advertisementAction)} = {advertisementAction}, ");
-            _builder.Append($"{nameof(platform)}={platform}, ");
-            _builder.Append($"{nameof(placement)}={placement}");
+            _builder.Append($"{nameof(advertisementAction)} = {advertisementAction.ToString().ToSnakeCase()}, ");
+            _builder.Append($"{nameof(systemType)}={systemType.ToString().ToSnakeCase()}, ");
+            _builder.Append($"{nameof(placement)}={placement.ToString().ToSnakeCase()}");
             LogSystem.Log(_builder.ToString());
         }
         
@@ -103,7 +178,7 @@ namespace Modules.Analytics
             _builder.Clear();
 
             _builder.Append("Progress statistics have been sent: ");
-            _builder.Append($"{nameof(progressStatus)} = {progressStatus}, ");
+            _builder.Append($"{nameof(progressStatus)} = {progressStatus.ToString().ToSnakeCase()}, ");
             _builder.Append($"{nameof(levelType)}={levelType}, ");
             _builder.Append($"{nameof(levelName)}={levelName}, ");
             _builder.Append($"{nameof(progressPercent)}={progressPercent}");
@@ -116,8 +191,8 @@ namespace Modules.Analytics
             _builder.Clear();
 
             _builder.Append("Resource statistics have been sent: ");
-            _builder.Append($"{nameof(flowType)} = {flowType}, ");
-            _builder.Append($"{nameof(currencyType)}={currencyType}, ");
+            _builder.Append($"{nameof(flowType)} = {flowType.ToString().ToSnakeCase()}, ");
+            _builder.Append($"{nameof(currencyType)}={currencyType.ToString().ToSnakeCase()}, ");
             _builder.Append($"{nameof(amount)}={amount}, ");
             _builder.Append($"{nameof(itemType)}={itemType}, ");
             _builder.Append($"{nameof(itemId)}={itemId}");
@@ -131,10 +206,10 @@ namespace Modules.Analytics
             _builder.Append("Advertisement Revenue event have been sent: ");
             _builder.Append($"{nameof(revenue.Revenue)} = {revenue.Revenue}, ");
             _builder.Append($"{nameof(revenue.Currency)}={revenue.Currency}, ");
-            _builder.Append($"{nameof(revenue.Platform)}={revenue.Platform}, ");
+            _builder.Append($"{nameof(revenue.AdvertisementsSystemName)}={revenue.AdvertisementsSystemName}, ");
             _builder.Append($"{nameof(revenue.AdvertisementUnitName)}={revenue.AdvertisementUnitName}, ");
             _builder.Append($"{nameof(revenue.Format)}={revenue.Format}, ");
-            _builder.Append($"{nameof(revenue.Source)}={revenue.Source}");
+            _builder.Append($"{nameof(revenue.NetworkName)}={revenue.NetworkName}");
             LogSystem.Log(_builder.ToString());
         }
     }

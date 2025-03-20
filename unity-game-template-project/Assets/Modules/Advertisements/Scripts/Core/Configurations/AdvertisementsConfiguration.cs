@@ -8,15 +8,19 @@ namespace Modules.Advertisements.Configurations
     public sealed class AdvertisementsConfiguration : ScriptableObject
     {
         [LabelWidth(250)]
-        [field: SerializeField, Range(0, 1)] public float InterstitialOnStartLevelProbability = 1f;
+        [field: SerializeField, Range(0, 1)]
+        public float InterstitialOnStartLevelProbability { get; private set; } = 1f;
 
         [LabelWidth(250)]
-        [field: SerializeField, Range(0, 1)] public float InterstitialOnRestartLevelProbability = 1f;
+        [field: SerializeField, Range(0, 1)] 
+        public float InterstitialOnRestartLevelProbability { get; private set; } = 1f;
 
         [LabelWidth(250)]
-        [field: SerializeField, Range(0, 1)] public float InterstitialOnExitLevelProbability = 1f;
+        [field: SerializeField, Range(0, 1)] 
+        public float InterstitialOnExitLevelProbability { get; private set; } = 1f;
 
         [LabelWidth(250)]
-        [field: SerializeField, MinValue(0)] public int MaxLevelRestartsWithAdvertisiment = 2;
+        [field: SerializeField, MinValue(0)] 
+        public int MaxLevelRestartsWithAdvertisiment { get; private set; } = 2;
     }
 }

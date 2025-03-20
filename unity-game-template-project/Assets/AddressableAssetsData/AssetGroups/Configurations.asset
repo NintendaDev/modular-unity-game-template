@@ -53,12 +53,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - configurations
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 537b53a802ad6734a831a001220dd5e5
-    m_Address: AudioMixerConfiguration
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - configurations
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 65b2e43e89312b641a9c17380b4ff9bd
     m_Address: WalletAssetsConfiguration
     m_ReadOnly: 0
@@ -89,8 +83,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - configurations
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3a90ed366427fb2408283bb4439f6380
-    m_Address: SoundConfiguration
+  - m_GUID: c92be121cc6bd1e40b07c7ec5a1301f5
+    m_Address: Assets/Game/Configurations/Audio/SoundConfiguration.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - configurations
@@ -103,6 +97,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 07cbb6579ca2d514eb794a5dcf0d208d
     m_Address: Assets/Modules/Analytics/Configurations/DefaultAnalyticsParamsNames.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - configurations
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 511f6e623663f5f4d857ea95856f3351
+    m_Address: Assets/Modules/AudioManagement/Configurations/AudioMixerConfiguration.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - configurations

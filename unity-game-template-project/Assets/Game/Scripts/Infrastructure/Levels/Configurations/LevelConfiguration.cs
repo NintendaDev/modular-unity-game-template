@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Game.Infrastructure.Levels.Configurations
 {
-    [CreateAssetMenu(fileName = "new LevelConfiguration", menuName = "Game/Levels/LevelConfiguration")]
+    [CreateAssetMenu(fileName = "new LevelConfiguration", menuName = "GameTemplate/Levels/LevelConfiguration")]
     public sealed class LevelConfiguration : ScriptableObject
     {
         [SerializeField, IsNotNoneLevelCode] private LevelCode _levelCode;

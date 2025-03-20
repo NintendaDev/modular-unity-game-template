@@ -30,25 +30,25 @@ namespace Modules.Advertisements.AnalyticsAddon
         public bool TryShowInterstitial(AdvertisementPlacement placement, Action onCloseCallback = null)
         {
             _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Request, placement, 
-                _advertisementsSystem.Platform);
+                _advertisementsSystem.SystemType);
             
             bool isSuccessShow = _advertisementsSystem.TryShowInterstitial(onCloseCallback: onCloseCallback,
                 onClickCallback: () =>
                 {
                     _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Clicked, placement,
-                        _advertisementsSystem.Platform);
+                        _advertisementsSystem.SystemType);
                 },
                 
                 onShowCallback: () =>
                 {
                     _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Show, placement,
-                        _advertisementsSystem.Platform);
+                        _advertisementsSystem.SystemType);
                 });
 
             if (isSuccessShow == false)
             {
                 _analyticsSystem.SendInterstitialEvent(AdvertisementAction.FailedShow, placement, 
-                    _advertisementsSystem.Platform);
+                    _advertisementsSystem.SystemType);
             }
             
             return isSuccessShow;
@@ -58,32 +58,32 @@ namespace Modules.Advertisements.AnalyticsAddon
             Action onCloseCallback = null)
         {
             _analyticsSystem.SendRewardEvent(AdvertisementAction.Request, placement, 
-                _advertisementsSystem.Platform);
+                _advertisementsSystem.SystemType);
             
             bool isSuccessShow = _advertisementsSystem.TryShowReward(onCloseCallback: onCloseCallback,
                 onSuccessCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.RewardReceived, placement, 
-                        _advertisementsSystem.Platform);
+                        _advertisementsSystem.SystemType);
                     
                     onSuccessCallback?.Invoke();
                 },
                 onShowCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.Show, placement,
-                        _advertisementsSystem.Platform);
+                        _advertisementsSystem.SystemType);
                 },
                 onClickCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.Clicked, placement,
-                        _advertisementsSystem.Platform);
+                        _advertisementsSystem.SystemType);
                 }
                 );
             
             if (isSuccessShow == false)
             {
                 _analyticsSystem.SendRewardEvent(AdvertisementAction.FailedShow, placement, 
-                    _advertisementsSystem.Platform);
+                    _advertisementsSystem.SystemType);
             }
 
             return isSuccessShow;

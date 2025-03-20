@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Modules.AudioManagement.Mixer
 {
-    [CreateAssetMenu(fileName = "new AudioMixerConfiguration", menuName = "GameTemplate/Audio/AudioMixerConfiguration")]
+    [CreateAssetMenu(fileName = "new AudioMixerConfiguration", menuName = "Modules/Audio/AudioMixerConfiguration")]
     public sealed class AudioMixerConfiguration : ScriptableObject
     {
         [field: SerializeField, Required] public UnityEngine.Audio.AudioMixer AudioMixer { get; private set; }

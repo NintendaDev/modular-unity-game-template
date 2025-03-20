@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Modules.Extensions;
+using Modules.Encrypt;
 using Modules.SaveSystem.Repositories.SerializeStrategies;
 using Modules.SaveSystem.SaveStrategies;
 

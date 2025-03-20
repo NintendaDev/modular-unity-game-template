@@ -8,7 +8,7 @@ namespace Modules.Advertisements.Systems
     {
         public event Action<AdvertisementRevenue> RevenueReceived;
         
-        public AdvertisementsPlatform Platform { get; }
+        public AdvertisementsSystemType SystemType { get; }
         
         public bool IsShowInterstitialOrReward { get; }
 

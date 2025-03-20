@@ -7,15 +7,15 @@ namespace Modules.Scheduler
 {
     public sealed class ScheduledAction : IDisposable
     {
-        private List<CountdownTimer> _timersPool = new();
-        private Dictionary<CountdownTimer, Action> _internalCallbacks = new();
+        private readonly List<CountdownTimer> _timersPool = new();
+        private readonly Dictionary<CountdownTimer, Action> _internalCallbacks = new();
         
         public void Dispose()
         {
             _timersPool.ForEach(timer => timer.Dispose());
         }
 
-        public void Shedule(Action action, float time)
+        public void Schedule(Action action, float time)
         {
             CountdownTimer timer = GetTimer();
             timer.Finished += CreateCallback(timer, action);

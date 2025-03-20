@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Modules.Advertisements.Types;
@@ -20,31 +21,31 @@ namespace Modules.Analytics.Stub
             LogSystem.SetPrefix("[Stub Analytics] ");
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode)
+        public override void SendCustomEvent(string eventName)
         {
-            LogEvent(eventCode);
+            LogEvent(eventName);
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode, Dictionary<string, object> data)
+        public override void SendCustomEvent(string eventName, Dictionary<string, object> data)
         {
-            LogEvent(eventCode);
+            LogEvent(eventName, data);
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode, float value)
+        public override void SendCustomEvent(string eventName, float value)
         {
-            LogEvent(eventCode);
+            LogEvent(eventName, value);
         }
 
-        public override void SendInterstitialEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform platform)
+        public override void SendInterstitialEvent(AdvertisementAction advertisementAction, 
+            AdvertisementPlacement placement, AdvertisementsSystemType systemType)
         {
-            LogEvent(advertisementAction, placement, platform);
+            LogEvent(advertisementAction, placement, systemType);
         }
 
         public override void SendRewardEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform platform)
+            AdvertisementsSystemType systemType)
         {
-            LogEvent(advertisementAction, placement, platform);
+            LogEvent(advertisementAction, placement, systemType);
         }
 
         public override void SendErrorEvent(LogLevel logLevel, string message)
@@ -54,7 +55,7 @@ namespace Modules.Analytics.Stub
 
         public override void SendProgressEvent(ProgressStatus progressStatus, string levelName, int progressPercent)
         {
-            LogEvent(progressStatus, string.Empty, levelName, progressPercent);
+            LogEvent(progressStatus, String.Empty, levelName, progressPercent);
         }
 
         public override void SendProgressEvent(ProgressStatus progressStatus, string levelType, string levelName, 
@@ -66,6 +67,21 @@ namespace Modules.Analytics.Stub
         public void SendAdvertisementRevenueEvent(AdvertisementRevenue revenue)
         {
             LogEvent(revenue);
+        }
+
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode)
+        {
+            SendCustomEvent(eventCode.ToString());
+        }
+
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode, Dictionary<string, object> data)
+        {
+            SendCustomEvent(eventCode.ToString(), data);
+        }
+
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode, float value)
+        {
+            SendCustomEvent(eventCode.ToString(), value);
         }
     }
 }

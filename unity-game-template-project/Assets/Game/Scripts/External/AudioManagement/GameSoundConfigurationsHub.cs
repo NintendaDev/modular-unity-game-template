@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.External.AudioManagement
 {
     [CreateAssetMenu(fileName = "new GameSoundConfigurationsHub", 
-        menuName = "Game/AudioManagement/GameSoundConfigurationsHub")]
+        menuName = "GameTemplate/AudioManagement/GameSoundConfigurationsHub")]
     public sealed class GameSoundConfigurationsHub : ScriptableObject
     {
         [field: SerializeField, Required] public SoundConfiguration GameHub { get; private set; }

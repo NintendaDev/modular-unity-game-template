@@ -8,9 +8,9 @@ namespace Modules.AssetsManagement.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private IAddressablesService _addressablesService;
-        private StaticDataServiceConfiguration _serviceConfiguration;
-        private Dictionary<Type, UnityEngine.Object> _configurations = new();
+        private readonly IAddressablesService _addressablesService;
+        private readonly StaticDataServiceConfiguration _serviceConfiguration;
+        private readonly Dictionary<Type, UnityEngine.Object> _configurations = new();
 
         public StaticDataService(IAddressablesService addressablesService, 
             StaticDataServiceConfiguration serviceConfiguration)

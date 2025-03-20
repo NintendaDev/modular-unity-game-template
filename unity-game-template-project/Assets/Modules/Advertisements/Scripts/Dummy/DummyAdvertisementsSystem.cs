@@ -9,8 +9,8 @@ namespace Modules.Advertisements.Dummy
     public sealed class DummyAdvertisementsSystem : AdvertisementsSystem
     {
         public override event Action<AdvertisementRevenue> RevenueReceived;
-        
-        public override AdvertisementsPlatform Platform => AdvertisementsPlatform.Dummy;
+
+        public override AdvertisementsSystemType SystemType => AdvertisementsSystemType.Dummy;
         
         public override bool IsShowInterstitialOrReward => false;
 
@@ -39,23 +39,19 @@ namespace Modules.Advertisements.Dummy
             Action onClickCallback = null)
         {
             Debug.Log("Interstitial Ad show started");
-            DisableSoundAndGameTime();
             onShowCallback?.Invoke();
             onClickCallback?.Invoke();
             onCloseCallback?.Invoke();
-            EnableSoundAndGameTime();
         }
 
         protected override void StartRewardBehaviour(Action onSuccessCallback = null, Action onCloseCallback = null,
             Action onShowCallback = null, Action onClickCallback = null)
         {
             Debug.Log("Redard Ad show started");
-            DisableSoundAndGameTime();
             onShowCallback?.Invoke();
             onClickCallback?.Invoke();
             onSuccessCallback?.Invoke();
             onCloseCallback?.Invoke();
-            EnableSoundAndGameTime();
         }
     }
 }

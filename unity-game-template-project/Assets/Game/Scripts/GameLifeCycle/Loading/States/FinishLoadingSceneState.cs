@@ -21,7 +21,7 @@ namespace Game.GameLifeCycle.Loading
         {
             await base.Enter();
             await StateMachine.SwitchState<GameHubGameState>();
-            SendAnalyticsEvent(AnalyticsEventCode.GameBootGameHub);
+            SendAnalyticsEvent(AnalyticsEventCode.GameBootMainMenu);
         }
     }
 }
