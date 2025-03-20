@@ -1,8 +1,8 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using Game.Infrastructure.Configurations;
-using Game.Infrastructure.Levels.Configurations;
+using Game.Application.Common;
+using Game.Application.GameHub;
 using Game.UI.GameHub.LevelsMenu.Presenters;
 using Game.UI.GameHub.LevelsMenu.Views;
 using Modules.AssetsManagement.AddressablesOperations;

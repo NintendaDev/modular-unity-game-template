@@ -4,7 +4,8 @@ using UnityEngine.AddressableAssets;
 
 namespace Modules.PopupsSystem.Configurations
 {
-    [CreateAssetMenu(fileName = "new PopupsAssetsConfiguration", menuName = "Modules/PopupsSystem/PopupsAssetsConfiguration")]
+    [CreateAssetMenu(fileName = "new PopupsAssetsConfiguration", 
+        menuName = "Modules/PopupsSystem/PopupsAssetsConfiguration")]
     public sealed class PopupsAssetsConfiguration : ScriptableObject
     {
         [field: SerializeField, Required] public AssetReference InfoPopup { get; private set; }

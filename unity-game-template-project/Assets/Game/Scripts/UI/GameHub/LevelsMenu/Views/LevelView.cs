@@ -1,5 +1,5 @@
 using System;
-using Game.Infrastructure.Levels;
+using Game.Application.Common;
 using Modules.Core.Systems;
 using Modules.Core.UI;
 

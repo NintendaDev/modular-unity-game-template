@@ -1,4 +1,4 @@
-using Game.Infrastructure.Levels;
+using Game.Application.Common;
 using Modules.EventBus;
 
 namespace Game.UI.GameHub.Signals

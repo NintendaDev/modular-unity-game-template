@@ -15,8 +15,8 @@ namespace Modules.AudioManagement.Player
         private readonly IStaticDataService _staticDataService;
         private readonly Dictionary<AudioCode, SoundEvent> _loadedSoundEvents = new();
         private readonly Dictionary<AudioCode, AssetReferenceSoundEvent> _loadedSoundReferences = new();
+        private readonly HashSet<AudioCode> _lockedLoadAudioCodes = new();
         private SoundConfiguration _soundConfiguration;
-        private AudioCode _loadLockAudioCode;
 
         public SoundEventsRegistry(IAddressablesService addressablesService, IStaticDataService staticDataService)
         {
@@ -42,13 +42,13 @@ namespace Modules.AudioManagement.Player
             if (_loadedSoundReferences.ContainsKey(audioCode))
                 return true;
             
-            if (_loadLockAudioCode == audioCode)
+            if (_lockedLoadAudioCodes.Contains(audioCode))
                 return false;
 
             if (_soundConfiguration.IsExistAudioAsset(audioCode, out AudioAsset audioAsset) == false)
                 return false;
             
-            _loadLockAudioCode = audioCode;
+            _lockedLoadAudioCodes.Add(audioCode);
             
             SoundEvent soundEvent = await _addressablesService
                 .LoadAsync<SoundEvent>(audioAsset.Reference);
@@ -60,7 +60,7 @@ namespace Modules.AudioManagement.Player
             else
                 _loadedSoundReferences.Add(audioAsset.Code, audioAsset.Reference);
 
-            _loadLockAudioCode = AudioCode.None;
+            _lockedLoadAudioCodes.Remove(audioCode);
 
             return true;
         }
