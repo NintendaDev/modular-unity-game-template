@@ -1,5 +1,7 @@
 # Modular Unity Game Template
 
+![](images/demo.gif)
+
 This project is based on the following key ideas:
 - Controlled game loading
 - Modular development
@@ -11,9 +13,6 @@ The main idea of modular development is to create game functionality in the form
 In the modular approach, the game is suggested to be built using integration code that connects the operations of various independent modules. In this project, the modules are located in the folder Assets/Modules, and the integration code is in the folder Assets/Game/Scripts.
 
 The template includes a basic UI for level selection, game settings, and authorization, as well as a basic UI for gameplay scenes. The UI is implemented using the MVP Passive View pattern.
-
-This template is the result of working on a personal project [Geometry Dash](https://yandex.ru/games/app/378534). The core structure was taken from it and refined into a universal template.
-
 
 **A foundation is prepared for:**
 
