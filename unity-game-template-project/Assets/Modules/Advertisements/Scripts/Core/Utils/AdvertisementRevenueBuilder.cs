@@ -1,32 +1,40 @@
 using System;
 using Modules.Advertisements.Types;
 
-namespace Modules.Advertisements.Core.Modules.Advertisements.Scripts.Core.Utils
+namespace Modules.Advertisements.Scripts.Core.Utils
 {
     public sealed class AdvertisementRevenueBuilder
     {
-        private AdvertisementsPlatform _platform;
-        private string _source;
+        private AdvertisementsSystemType _advertisementsSystemType;
+        private string _networkName;
         private string _unitName;
         private string _format;
         private double _revenue;
         private RevenueCurrency _currency;
+        private string _placement;
 
         public AdvertisementRevenueBuilder()
         {
             Clear();
         }
 
-        public AdvertisementRevenueBuilder SetPlatform(AdvertisementsPlatform platform)
+        public AdvertisementRevenueBuilder SetAdvertisementsSystem(AdvertisementsSystemType advertisementsSystemType)
         {
-            _platform = platform;
+            _advertisementsSystemType = advertisementsSystemType;
 
             return this;
         }
         
-        public AdvertisementRevenueBuilder SetSource(string source)
+        public AdvertisementRevenueBuilder SetNetworkName(string networkName)
         {
-            _source = source;
+            _networkName = networkName;
+
+            return this;
+        }
+        
+        public AdvertisementRevenueBuilder SetPlacement(string placement)
+        {
+            _placement = placement;
 
             return this;
         }
@@ -67,10 +75,11 @@ namespace Modules.Advertisements.Core.Modules.Advertisements.Scripts.Core.Utils
             if (_revenue <= 0)
                 throw new Exception("Revenue cannot be less or equal to zero");
 
-            string platformName = (_platform != AdvertisementsPlatform.None) ? _platform.ToString() : string.Empty;
+            string advertisementsSystemName = (_advertisementsSystemType != AdvertisementsSystemType.None) 
+                ? _advertisementsSystemType.ToString() : string.Empty;
                 
-            var revenue = new AdvertisementRevenue(platformName, _source, _unitName, _format, _revenue, 
-                _currency.ToString());
+            var revenue = new AdvertisementRevenue(advertisementsSystemName, _networkName,_placement, _unitName, 
+                _format, _revenue, _currency.ToString());
             
             Clear();
 
@@ -79,8 +88,8 @@ namespace Modules.Advertisements.Core.Modules.Advertisements.Scripts.Core.Utils
 
         public void Clear()
         {
-            _platform = AdvertisementsPlatform.None;
-            _source = string.Empty;
+            _advertisementsSystemType = AdvertisementsSystemType.None;
+            _networkName = string.Empty;
             _unitName = string.Empty;
             _format = string.Empty;
             _revenue = 0;

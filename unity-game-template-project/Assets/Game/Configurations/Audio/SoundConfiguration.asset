@@ -9,10 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 500c101b3880f904891a9023414a1d9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 413a513124937f54b84b16c11761ce61, type: 3}
   m_Name: SoundConfiguration
   m_EditorClassIdentifier: 
   _audioAssets:
+  - _reference:
+      m_AssetGUID: 39503e1352b57734188e66787b9feb90
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 1
+  - _reference:
+      m_AssetGUID: 4a912f8d7749b4f458d55e90e29c033b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 2
   - _reference:
       m_AssetGUID: 45dbb47a53779ea47a2abc5aeb10bc4c
       m_SubObjectName: 
@@ -26,14 +38,44 @@ MonoBehaviour:
       m_EditorAssetChanged: 1
     _code: 4
   - _reference:
-      m_AssetGUID: 39503e1352b57734188e66787b9feb90
+      m_AssetGUID: 7c8260ba255e30d48ae212a648bd8eeb
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
-    _code: 1
+    _code: 6
   - _reference:
-      m_AssetGUID: 4a912f8d7749b4f458d55e90e29c033b
+      m_AssetGUID: 7080c803f4a0c214b941454cf2c3b5cc
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
-    _code: 2
+    _code: 7
+  - _reference:
+      m_AssetGUID: f500a59334031c64ca97d87fb18235d0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 8
+  - _reference:
+      m_AssetGUID: 0309730ff11afe1428d8e61c31cccb8f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 9
+  - _reference:
+      m_AssetGUID: 0d911d941f2abbc408ee9c8a01d7f02d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 10
+  - _reference:
+      m_AssetGUID: a413a271483c92440991f3ed07246449
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 5
+  - _reference:
+      m_AssetGUID: c92de4e13de4b5543a167a2278824885
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    _code: 11

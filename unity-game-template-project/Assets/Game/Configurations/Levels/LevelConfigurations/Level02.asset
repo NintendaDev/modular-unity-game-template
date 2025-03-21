@@ -15,12 +15,7 @@ MonoBehaviour:
   _levelCode: 2
   _title: Second Level
   _scene:
-    m_AssetGUID: 40fc25381c8d4ce41a9c5d378369ff87
+    m_AssetGUID: 71841beb4bdb9f04e8d569c055773b7b
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _audioReference:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+    m_EditorAssetChanged: 1

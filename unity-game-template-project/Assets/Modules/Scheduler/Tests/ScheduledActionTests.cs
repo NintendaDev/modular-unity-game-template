@@ -24,8 +24,8 @@ namespace Modules.Sheduler
             float seconds = 1f;
             
             //Act
-            sheduledAction.Shedule(() => actionOneCallCount++, seconds);
-            sheduledAction.Shedule(() => actionTwoCallCount++, seconds);
+            sheduledAction.Schedule(() => actionOneCallCount++, seconds);
+            sheduledAction.Schedule(() => actionTwoCallCount++, seconds);
             yield return new WaitForSeconds(seconds + 0.05f);
             
             //Assert

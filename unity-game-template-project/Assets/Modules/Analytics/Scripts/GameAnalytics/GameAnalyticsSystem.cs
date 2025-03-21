@@ -12,6 +12,8 @@ namespace Modules.Analytics.GA
 {
     public sealed class GameAnalyticsSystem : AnalyticsSystem, IGameAnalyticsATTListener
     {
+        private const AnalyticsSystemCode AnalyticsSystem = AnalyticsSystemCode.GameAnalytics;
+        
         public GameAnalyticsSystem(ILogSystem logSystem, IStaticDataService staticDataService) 
             : base(logSystem, staticDataService)
         {
@@ -38,80 +40,69 @@ namespace Modules.Analytics.GA
             GameAnalyticsILRD.SubscribeMaxImpressions();
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode)
+        public override void SendCustomEvent(string eventName)
         {
-            if (IsExistEventName(eventCode, AnalyticsSystemCode.GameAnalytics, out string eventName) == false)
-                return;
-
             if (Application.isEditor)
             {
-                LogEvent(eventCode);
+                LogEvent(eventName);
 
                 return;
             }
             
             GameAnalytics.NewDesignEvent(eventName);
-            LogEvent(eventCode);
+            LogEvent(eventName);
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode, Dictionary<string, object> data)
+        public override void SendCustomEvent(string eventName, Dictionary<string, object> data)
         {
-            if (IsExistEventName(eventCode, AnalyticsSystemCode.GameAnalytics, out string eventName) == false)
-                return;
-            
             if (Application.isEditor)
             {
-                LogEvent(eventCode);
+                LogEvent(eventName, data);
 
                 return;
             }
             
             GameAnalytics.NewDesignEvent(eventName, data);
-            LogEvent(eventCode);
+            LogEvent(eventName, data);
         }
 
-        public override void SendCustomEvent(AnalyticsEventCode eventCode, float value)
+        public override void SendCustomEvent(string eventName, float value)
         {
-            if (IsExistEventName(eventCode, AnalyticsSystemCode.GameAnalytics, out string eventName) == false)
-                return;
-            
             if (Application.isEditor)
             {
-                LogEvent(eventCode);
+                LogEvent(eventName, value);
 
                 return;
             }
             
             GameAnalytics.NewDesignEvent(eventName, value);
-            LogEvent(eventCode);
+            LogEvent(eventName, value);
         }
 
         public override void SendInterstitialEvent(AdvertisementAction advertisementAction,
-            AdvertisementPlacement placement, AdvertisementsPlatform platform)
+            AdvertisementPlacement placement, AdvertisementsSystemType systemType)
         {
             if (Application.isEditor)
             {
-                LogEvent(advertisementAction, placement, platform);
+                LogEvent(advertisementAction, placement, systemType);
 
                 return;
             }
             
-            SendAdvertisementEvent(advertisementAction, placement, platform, GAAdType.Interstitial);
-            LogEvent(advertisementAction, placement, platform);
+            SendAdvertisementEvent(advertisementAction, placement, systemType, GAAdType.Interstitial);
         }
         
         public override void SendRewardEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement, 
-            AdvertisementsPlatform platform)
+            AdvertisementsSystemType systemType)
         {
             if (Application.isEditor)
             {
-                LogEvent(advertisementAction, placement, platform);
+                LogEvent(advertisementAction, placement, systemType);
 
                 return;
             }
             
-            SendAdvertisementEvent(advertisementAction, placement, platform, GAAdType.RewardedVideo);
-            LogEvent(advertisementAction, placement, platform);
+            SendAdvertisementEvent(advertisementAction, placement, systemType, GAAdType.RewardedVideo);
         }
 
         public override void SendErrorEvent(LogLevel logLevel, string message)
@@ -150,6 +141,30 @@ namespace Modules.Analytics.GA
             
             LogEvent(progressStatus, levelType, levelName, progressPercent);
         }
+        
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode)
+        {
+            if (IsExistEvent(eventCode, AnalyticsSystem, out string eventName) == false)
+                return;
+
+            SendCustomEvent(eventName);
+        }
+
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode, Dictionary<string, object> data)
+        {
+            if (IsExistEvent(eventCode, AnalyticsSystem, out string eventName) == false)
+                return;
+
+            SendCustomEvent(eventName, data);
+        }
+
+        protected override void SendCustomEventInternal(AnalyticsEventCode eventCode, float value)
+        {
+            if (IsExistEvent(eventCode, AnalyticsSystem, out string eventName) == false)
+                return;
+
+            SendCustomEvent(eventName, value);
+        }
 
         private void SendResourceEvent(ResourceFlowType flowType, CurrencyType currencyType, float amount, 
             string itemType, string itemId)
@@ -161,26 +176,28 @@ namespace Modules.Analytics.GA
                 return;
             }
 
-            GameAnalytics.NewResourceEvent(flowType.ToGameAnalytics(), currencyType.ToString(), amount, itemType, 
+            GameAnalytics.NewResourceEvent(flowType.ToGameAnalytics(), 
+                ConvertToSnakeCase(currencyType.ToString()), amount, itemType, 
                 itemId);
             
             LogEvent(flowType, currencyType, amount, itemType, itemId);
         }
 
         private void SendAdvertisementEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform advertisementsPlatform, GAAdType advertisementType)
+            AdvertisementsSystemType advertisementsSystemType, GAAdType advertisementType)
         {
             if (Application.isEditor)
             {
-                LogEvent(advertisementAction, placement, advertisementsPlatform);
+                LogEvent(advertisementAction, placement, advertisementsSystemType);
 
                 return;
             }
 
             GameAnalytics.NewAdEvent(advertisementAction.ToGameAnalytics(), advertisementType, 
-                advertisementsPlatform.ToString(), placement.ToString());
+                ConvertToSnakeCase(advertisementsSystemType.ToString()), 
+                ConvertToSnakeCase(placement.ToString()));
             
-            LogEvent(advertisementAction, placement, advertisementsPlatform);
+            LogEvent(advertisementAction, placement, advertisementsSystemType);
         }
 
         public void GameAnalyticsATTListenerNotDetermined()

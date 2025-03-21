@@ -27,6 +27,76 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9388e29120c6a6c4584a36e830096b9a
+    m_Address: Jump_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c8260ba255e30d48ae212a648bd8eeb
+    m_Address: Jump_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9e65120bb2ed1f4ea26cd57086bcf21
+    m_Address: Lava_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0309730ff11afe1428d8e61c31cccb8f
+    m_Address: Lava_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 763dc82d76b6e674eaad3b0cda28880e
+    m_Address: Push_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f500a59334031c64ca97d87fb18235d0
+    m_Address: Push_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1740140a9e458ad42bb24498b319b8d0
+    m_Address: TakeDamage (Enemy) SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c92de4e13de4b5543a167a2278824885
+    m_Address: TakeDamage (Enemy) SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31c09396776a4d34893f1ad618a241ad
+    m_Address: TakeDamage_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a413a271483c92440991f3ed07246449
+    m_Address: TakeDamage_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dd37103c376d1b44b9feb24607d9d6a
+    m_Address: Toss_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7080c803f4a0c214b941454cf2c3b5cc
+    m_Address: Toss_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 902a8368fb14bfc45b790353cc705902
+    m_Address: Trampline_SC
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d911d941f2abbc408ee9c8a01d7f02d
+    m_Address: Trampline_SE
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 76321b1bbea0af144be732232186accb, type: 2}
   m_SchemaSet:

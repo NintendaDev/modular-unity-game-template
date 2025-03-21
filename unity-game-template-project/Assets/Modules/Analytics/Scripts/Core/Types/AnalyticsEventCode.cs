@@ -11,8 +11,11 @@
         LevelStart = 6,
         LevelComplete= 7,
         LevelFail = 8,
+        GameBootBootstrap = 103,
         GameBootAuth = 100,
-        GameBootGameHub = 101,
         GameBootLoadProgress = 102,
+        GameBootGameHubBootstrap = 104,
+        GameBootRestartGameplayState = 105,
+        GameBootMainMenu = 101,
     }
 }

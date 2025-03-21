@@ -10,6 +10,14 @@ namespace Modules.Analytics
     {
         public UniTask InitializeAsync();
 
+        public bool CanSendEvent(AnalyticsEventCode eventCode);
+
+        public void SendCustomEvent(string eventName);
+        
+        public void SendCustomEvent(string eventName, Dictionary<string, object> data);
+        
+        public void SendCustomEvent(string eventName, float value);
+
         public void SendCustomEvent(AnalyticsEventCode eventCode);
 
         public void SendCustomEvent(AnalyticsEventCode eventCode, Dictionary<string, object> data);
@@ -17,10 +25,10 @@ namespace Modules.Analytics
         public void SendCustomEvent(AnalyticsEventCode eventCode, float value);
         
         public void SendInterstitialEvent(AdvertisementAction advertisementAction,
-            AdvertisementPlacement placement, AdvertisementsPlatform platform);
+            AdvertisementPlacement placement, AdvertisementsSystemType systemType);
 
         public void SendRewardEvent(AdvertisementAction advertisementAction, AdvertisementPlacement placement,
-            AdvertisementsPlatform platform);
+            AdvertisementsSystemType systemType);
 
         public void SendErrorEvent(LogLevel logLevel, string message);
 

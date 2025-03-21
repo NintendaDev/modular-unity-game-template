@@ -3,19 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Platform
+  - Character
+  - Missile
+  - Target
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactible
+  - Dummy
+  - Enemy
+  - Character
+  - Platform
   - 
   - 
   - 
@@ -40,4 +44,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 679431691
+    locked: 0
+  - name: Lava
+    uniqueID: 4019134857
+    locked: 0
+  - name: Props
+    uniqueID: 2329412689
+    locked: 0
+  - name: Ground
+    uniqueID: 3869932675
+    locked: 0
+  - name: Platforms
+    uniqueID: 2772901385
+    locked: 0
+  - name: Enemy
+    uniqueID: 1301162173
+    locked: 0
+  - name: Character
+    uniqueID: 2064193051
+    locked: 0
+  - name: Effects
+    uniqueID: 3523181653
     locked: 0

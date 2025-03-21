@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0b0c553be8edd4682e9180fdd13e37, type: 3}
+  m_Name: I2Languages
+  m_EditorClassIdentifier: 
+  mSource:
+    UserAgreesToHaveItOnTheScene: 0
+    UserAgreesToHaveItInsideThePluginsFolder: 0
+    GoogleLiveSyncIsUptoDate: 1
+    mTerms:
+    - Term: Levels
+      TermType: 0
+      Description: 
+      Languages:
+      - Levels
+      - "\u0423\u0440\u043E\u0432\u043D\u0438"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Login
+      TermType: 0
+      Description: 
+      Languages:
+      - Login
+      - "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Settings
+      TermType: 0
+      Description: 
+      Languages:
+      - Settings
+      - "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LocalizationTerm/Ok
+      TermType: 0
+      Description: 
+      Languages:
+      - Ok
+      - "\u0425\u043E\u0440\u043E\u0448\u043E"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LocalizationTerm/Info
+      TermType: 0
+      Description: 
+      Languages:
+      - Info
+      - "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LocalizationTerm/Error
+      TermType: 0
+      Description: 
+      Languages:
+      - Error
+      - "\u041E\u0448\u0438\u0431\u043A\u0430"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LocalizationTerm/SuccessAuthorizationMessage
+      TermType: 0
+      Description: 
+      Languages:
+      - Authorization successful
+      - "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u043E\u0448\u043B\u0430
+        \u0443\u0441\u043F\u0435\u0448\u043D\u043E"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LocalizationTerm/ErrorAuthorizationMessage
+      TermType: 0
+      Description: 
+      Languages:
+      - An unknown error occurred during authorization
+      - "\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u0438
+        \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F
+        \u043E\u0448\u0438\u0431\u043A\u0430"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Pause
+      TermType: 0
+      Description: 
+      Languages:
+      - Pause
+      - "\u041F\u0430\u0443\u0437\u0430"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: First Level
+      TermType: 0
+      Description: 
+      Languages:
+      - First Level
+      - "\u041F\u0435\u0440\u0432\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Second Level
+      TermType: 0
+      Description: 
+      Languages:
+      - Second Level
+      - "\u0412\u0442\u043E\u0440\u043E\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Game Over
+      TermType: 0
+      Description: 
+      Languages:
+      - Game Over
+      - "\u041A\u043E\u043D\u0435\u0446 \u0438\u0433\u0440\u044B"
+      Flags: 0000
+      Languages_Touch: []
+    - Term: GameplayInstructions
+      TermType: 0
+      Description: 
+      Languages:
+      - 'SPACE - Jump
+
+        Left Mouse - Push
+
+        Right Mouse - Toss
+
+        AWSD
+        - Moving'
+      - "SPACE - \u041F\u0440\u044B\u0436\u043E\u043A\nLeft Mouse - \u0422\u043E\u043B\u0447\u043E\u043A\nRight
+        Mouse - \u041F\u043E\u0434\u0431\u0440\u043E\u0441\u0438\u0442\u044C\nAWSD
+        - \u0414\u0432\u0438\u0436\u0435\u043D\u0438\u0435"
+      Flags: 0000
+      Languages_Touch: []
+    CaseInsensitiveTerms: 0
+    OnMissingTranslation: 1
+    mTerm_AppName: 
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Russian
+      Code: ru
+      Flags: 0
+    IgnoreDeviceLanguage: 0
+    _AllowUnloadingLanguages: 0
+    Google_WebServiceURL: 
+    Google_SpreadsheetKey: 
+    Google_SpreadsheetName: 
+    Google_LastUpdatedVersion: 
+    Google_Password: change_this
+    GoogleUpdateFrequency: 3
+    GoogleInEditorCheckFrequency: 2
+    GoogleUpdateSynchronization: 1
+    GoogleUpdateDelay: 0
+    Assets: []
+    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalCSVSeparator: ','
+    Spreadsheet_LocalCSVEncoding: utf-8
+    Spreadsheet_SpecializationAsRows: 1
+    Spreadsheet_SortRows: 1

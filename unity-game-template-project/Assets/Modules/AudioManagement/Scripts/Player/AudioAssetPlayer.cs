@@ -14,11 +14,14 @@ namespace Modules.AudioManagement.Player
     {
         private SoundManager _soundManager;
         private readonly SoundEventsRegistry _soundEventsRegistry;
+        private bool _isPausedAll;
 
         public AudioAssetPlayer(IAddressablesService addressablesService, IStaticDataService staticDataService)
         {
             _soundEventsRegistry = new SoundEventsRegistry(addressablesService, staticDataService);
         }
+
+        public bool IsInitialized { get; private set; }
 
         public void Dispose()
         {
@@ -26,11 +29,15 @@ namespace Modules.AudioManagement.Player
                 StopAll();
             
             _soundEventsRegistry.Dispose();
+            IsInitialized = false;
         }
 
-        public void Initialize()
+        public async UniTask InitializeAsync()
         {
-            _soundEventsRegistry.Initialize();
+            if (IsInitialized)
+                return;
+            
+            await  _soundEventsRegistry.InitializeAsync();
             _soundManager = Object.FindObjectOfType<SoundManager>();
 
             if (_soundManager == null)
@@ -38,18 +45,28 @@ namespace Modules.AudioManagement.Player
                 _soundManager = new GameObject(nameof(SoundManager)).AddComponent<SoundManager>();
                 Object.DontDestroyOnLoad(_soundManager);
             }
+
+            IsInitialized = true;
         }
 
         public async UniTask WarmupAsync(params AudioCode[] audioCodes)
         {
             foreach (AudioCode audioCode in audioCodes)
+            {
+                if (audioCode == AudioCode.None)
+                    continue;
+                
                 await _soundEventsRegistry.TryLoadAudioAsync(audioCode);
+            }
         }
 
         public bool IsPlaying(AudioCode audioCode) => IsPlaying(audioCode, _soundManager.transform);
 
         public bool IsPlaying(AudioCode audioCode, Transform playPosition)
         {
+            if (audioCode == AudioCode.None)
+                return false;
+            
             if (TryGetSoundEventState(audioCode, playPosition, out SoundEventState soundEventState) == false)
                 return false;
             
@@ -60,6 +77,9 @@ namespace Modules.AudioManagement.Player
         
         public bool IsPaused(AudioCode audioCode, Transform playPosition)
         {
+            if (audioCode == AudioCode.None)
+                return true;
+            
             if (TryGetSoundEventState(audioCode, playPosition, out SoundEventState soundEventState) == false)
                 return false;
             
@@ -72,6 +92,9 @@ namespace Modules.AudioManagement.Player
         
         public async UniTask<bool> TryPlayAsync(AudioCode audioCode, Transform playPosition)
         {
+            if (_isPausedAll || audioCode == AudioCode.None)
+                return false;
+            
             if (_soundEventsRegistry.IsExistSoundEvent(audioCode, out SoundEvent soundEvent) == false)
             {
                 if (await _soundEventsRegistry.TryLoadAudioAsync(audioCode) == false)
@@ -80,21 +103,14 @@ namespace Modules.AudioManagement.Player
                 _soundEventsRegistry.IsExistSoundEvent(audioCode, out soundEvent);
             }
             
-            SoundEventState currentSoundState = soundEvent.GetSoundEventState(playPosition);
-
-            if (currentSoundState == SoundEventState.Playing)
-                return true;
-            
-            if (currentSoundState == SoundEventState.Paused)
-            {
-                soundEvent.Unpause(playPosition);
-                
-                return true;
-            }
-            
             soundEvent.Play(playPosition);
-
-            return true;
+            
+            if (soundEvent.GetSoundEventState(playPosition) == SoundEventState.Paused)
+                soundEvent.Unpause(playPosition);
+            
+            bool isSuccess = soundEvent.GetSoundEventState(playPosition) == SoundEventState.Playing;
+            
+            return isSuccess;
         }
         
         [Button, HideInEditorMode]
@@ -102,8 +118,11 @@ namespace Modules.AudioManagement.Player
         
         public bool TryPauseSound(AudioCode audioCode, Transform playPosition)
         {
-            if (_soundEventsRegistry.IsExistSoundEvent(audioCode, out SoundEvent soundEvent) == false)
+            if (audioCode == AudioCode.None ||
+                _soundEventsRegistry.IsExistSoundEvent(audioCode, out SoundEvent soundEvent) == false)
+            {
                 return false;
+            }
             
             soundEvent.Pause(playPosition);
 
@@ -115,8 +134,11 @@ namespace Modules.AudioManagement.Player
         
         public bool TryStopSound(AudioCode audioCode, Transform playPosition)
         {
-            if (_soundEventsRegistry.IsExistSoundEvent(audioCode, out SoundEvent soundEvent) == false)
+            if (audioCode == AudioCode.None ||
+                _soundEventsRegistry.IsExistSoundEvent(audioCode, out SoundEvent soundEvent) == false)
+            {
                 return false;
+            }
             
             SoundEventState currentSoundState = soundEvent.GetSoundEventState(playPosition);
 
@@ -129,13 +151,24 @@ namespace Modules.AudioManagement.Player
         }
 
         [Button, HideInEditorMode]
-        public void StopAll() => _soundManager.StopEverything(allowFadeOut: false);
-        
+        public void StopAll()
+        {
+            _soundManager.StopEverything(allowFadeOut: false);
+        }
+
         [Button, HideInEditorMode]
-        public void PauseAll() => _soundManager.PauseEverything();
-        
+        public void PauseAll()
+        {
+            _isPausedAll = true;
+            _soundManager.PauseEverything();
+        }
+
         [Button, HideInEditorMode]
-        public void UnpauseAll() => _soundManager.UnpauseEverything();
+        public void UnpauseAll()
+        {
+            _isPausedAll = false;
+            _soundManager.UnpauseEverything();
+        }
 
         private bool TryGetSoundEventState(AudioCode soundCode, Transform playPosition, out SoundEventState state)
         {

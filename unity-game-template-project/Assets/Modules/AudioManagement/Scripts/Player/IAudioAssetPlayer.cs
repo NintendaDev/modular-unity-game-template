@@ -6,7 +6,9 @@ namespace Modules.AudioManagement.Player
 {
     public interface IAudioAssetPlayer
     {
-        public void Initialize();
+        public bool IsInitialized { get; }
+        
+        public UniTask InitializeAsync();
 
         public UniTask WarmupAsync(params AudioCode[] audioCodes);
 

@@ -2,20 +2,23 @@ namespace Modules.Advertisements.Types
 {
     public struct AdvertisementRevenue
     {
-        public AdvertisementRevenue(string platform, string source, string advertisementUnitName, string format, double revenue, 
-            string currency)
+        public AdvertisementRevenue(string advertisementsSystemName, string networkName, string placement,
+            string advertisementUnitName, string format, double revenue, string currency)
         {
-            Platform = platform;
-            Source = source;
+            AdvertisementsSystemName = advertisementsSystemName;
+            NetworkName = networkName;
+            Placement = placement;
             AdvertisementUnitName = advertisementUnitName;
             Format = format;
             Revenue = revenue;
             Currency = currency;
         }
 
-        public string Platform { get;}
+        public string AdvertisementsSystemName { get;}
         
-        public string Source { get; }
+        public string NetworkName { get; }
+        
+        public string Placement { get; }
         
         public string AdvertisementUnitName { get; }
         

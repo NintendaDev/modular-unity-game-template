@@ -1,0 +1,4 @@
+Recommended scale of units with default camera settings:
+- Human = 0.5
+- Most monsters = 0.5
+- Trolls, Titans = 0.75 [!]
