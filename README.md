@@ -1,20 +1,29 @@
 # Modular Unity Game Template
 
-![](images/demo.gif)
+![============ GIF DEMONSTRATION ============](images/demo.gif)
 
 This project is based on the following key ideas:
 - Controlled game loading
 - Modular development
+- Minimal use of MonoBehaviour
 
-The controlled game loading is achieved by using a state machine for game phases (Bootstrap, Loading, Game Menu, Gameplay Levels) and avoiding the use of Awake in MonoBehaviour scripts. This concept is proposed by the developers at Knowledge Syndicate. The implementation is based on this approach and utilizes Zenject, Addressables, and UniTask.
+The controlled game loading is achieved by using a state machine for game phases (Bootstrap, Loading, Game Menu, Gameplay Levels) and avoiding the use of Awake in MonoBehaviour scripts.
+The implementation is based on this approach and utilizes Zenject, Addressables, and UniTask.
 
 The main idea of modular development is to create game functionality in the form of small, independent modules. For example, a separate module for analytics, advertising, asset management, and more. A module is independent of the implementation of a specific game, allowing it to be easily reused in other games.
 
 In the modular approach, the game is suggested to be built using integration code that connects the operations of various independent modules. In this project, the modules are located in the folder Assets/Modules, and the integration code is in the folder Assets/Game/Scripts.
 
-The template includes a basic UI for level selection, game settings, and authorization, as well as a basic UI for gameplay scenes. The UI is implemented using the MVP Passive View pattern.
+Minimal use of MonoBehaviour is achieved through the use of a DI framework. In gameplay, this is further enhanced by utilizing the Entity class, which is populated with the necessary objects via DI framework installers.
 
-**A foundation is prepared for:**
+**The template includes:**
+- Independent modules for use in integration code and other projects
+- An example implementation of the main menu, featuring authentication, volume control, and level selection (integration code)
+- An example implementation of 2D platformer gameplay (integration code)
+
+The UI is implemented using the MVP Passive View pattern.
+
+**The following solutions have been implemented in the project**
 
 - Integrating analytics (GameAnalytics, Firebase)
 - Implementing ads (AppLovin)
