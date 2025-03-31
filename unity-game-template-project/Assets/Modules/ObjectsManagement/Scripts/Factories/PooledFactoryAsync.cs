@@ -14,7 +14,7 @@ namespace Modules.ObjectsManagement.Factories
         private readonly IAddressablesService _addressablesService;
         private bool _isInitialize;
 
-        public PooledFactoryAsync(AssetReference prefabReference, IAddressablesService addressablesService,
+        protected PooledFactoryAsync(AssetReference prefabReference, IAddressablesService addressablesService,
             Pool<TObject> pool)
         {
             _prefabReference = prefabReference;

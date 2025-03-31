@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
+using Game.Application.Advertisements;
 using Game.Application.Common;
 using Game.Application.GameHub;
 using Game.Application.LevelLoading;
-using Modules.Advertisements.AnalyticsAddon;
 using Modules.Advertisements.Types;
 using Modules.Analytics;
 using Modules.AudioManagement.Player;

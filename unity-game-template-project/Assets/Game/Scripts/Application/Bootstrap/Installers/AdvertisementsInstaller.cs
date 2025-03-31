@@ -1,4 +1,4 @@
-﻿using Modules.Advertisements.AnalyticsAddon;
+﻿using Game.Application.Advertisements;
 using Modules.Advertisements.Dummy;
 using Zenject;
 

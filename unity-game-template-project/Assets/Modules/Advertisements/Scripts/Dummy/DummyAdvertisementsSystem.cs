@@ -9,8 +9,8 @@ namespace Modules.Advertisements.Dummy
     public sealed class DummyAdvertisementsSystem : AdvertisementsSystem
     {
         public override event Action<AdvertisementRevenue> RevenueReceived;
-
-        public override AdvertisementsSystemType SystemType => AdvertisementsSystemType.Dummy;
+        
+        public override AdvertisementsSystemType Type => AdvertisementsSystemType.Dummy;
         
         public override bool IsShowInterstitialOrReward => false;
 
@@ -18,6 +18,7 @@ namespace Modules.Advertisements.Dummy
 
         public override UniTask InitializeAsync()
         {
+            SetInitializeFlag();
             Debug.Log("Advertisements initialized");
             
             return UniTask.CompletedTask;
@@ -34,24 +35,33 @@ namespace Modules.Advertisements.Dummy
         {
             Debug.Log("Banner hide");
         }
+        
+        protected override void DestroyBanner()
+        {
+            Debug.Log("Banner destroyed");
+        }
 
         protected override void StartInterstitialBehaviour(Action onCloseCallback = null, Action onShowCallback = null,
             Action onClickCallback = null)
         {
             Debug.Log("Interstitial Ad show started");
+            DisableSound();
             onShowCallback?.Invoke();
             onClickCallback?.Invoke();
             onCloseCallback?.Invoke();
+            EnableSound();
         }
 
         protected override void StartRewardBehaviour(Action onSuccessCallback = null, Action onCloseCallback = null,
             Action onShowCallback = null, Action onClickCallback = null)
         {
             Debug.Log("Redard Ad show started");
+            DisableSound();
             onShowCallback?.Invoke();
             onClickCallback?.Invoke();
             onSuccessCallback?.Invoke();
             onCloseCallback?.Invoke();
+            EnableSound();
         }
     }
 }

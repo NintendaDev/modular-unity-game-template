@@ -4,6 +4,6 @@
     {
         None,
         Dummy,
-        AppLovin
+        AppLovin,
     }
 }

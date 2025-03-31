@@ -3,7 +3,7 @@ using Modules.Advertisements.Systems;
 using Modules.Advertisements.Types;
 using Modules.Analytics;
 
-namespace Modules.Advertisements.AnalyticsAddon
+namespace Game.Application.Advertisements
 {
     public sealed class AdvertisementsFacade : IDisposable
     {
@@ -30,25 +30,25 @@ namespace Modules.Advertisements.AnalyticsAddon
         public bool TryShowInterstitial(AdvertisementPlacement placement, Action onCloseCallback = null)
         {
             _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Request, placement, 
-                _advertisementsSystem.SystemType);
+                _advertisementsSystem.Type);
             
             bool isSuccessShow = _advertisementsSystem.TryShowInterstitial(onCloseCallback: onCloseCallback,
                 onClickCallback: () =>
                 {
                     _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Clicked, placement,
-                        _advertisementsSystem.SystemType);
+                        _advertisementsSystem.Type);
                 },
                 
                 onShowCallback: () =>
                 {
-                    _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Show, placement,
-                        _advertisementsSystem.SystemType);
+                    _analyticsSystem.SendInterstitialEvent(AdvertisementAction.Show, placement, 
+                        _advertisementsSystem.Type);
                 });
 
             if (isSuccessShow == false)
             {
                 _analyticsSystem.SendInterstitialEvent(AdvertisementAction.FailedShow, placement, 
-                    _advertisementsSystem.SystemType);
+                    _advertisementsSystem.Type);
             }
             
             return isSuccessShow;
@@ -58,32 +58,32 @@ namespace Modules.Advertisements.AnalyticsAddon
             Action onCloseCallback = null)
         {
             _analyticsSystem.SendRewardEvent(AdvertisementAction.Request, placement, 
-                _advertisementsSystem.SystemType);
+                _advertisementsSystem.Type);
             
             bool isSuccessShow = _advertisementsSystem.TryShowReward(onCloseCallback: onCloseCallback,
                 onSuccessCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.RewardReceived, placement, 
-                        _advertisementsSystem.SystemType);
+                        _advertisementsSystem.Type);
                     
                     onSuccessCallback?.Invoke();
                 },
                 onShowCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.Show, placement,
-                        _advertisementsSystem.SystemType);
+                        _advertisementsSystem.Type);
                 },
                 onClickCallback: () =>
                 {
                     _analyticsSystem.SendRewardEvent(AdvertisementAction.Clicked, placement,
-                        _advertisementsSystem.SystemType);
+                        _advertisementsSystem.Type);
                 }
                 );
             
             if (isSuccessShow == false)
             {
                 _analyticsSystem.SendRewardEvent(AdvertisementAction.FailedShow, placement, 
-                    _advertisementsSystem.SystemType);
+                    _advertisementsSystem.Type);
             }
 
             return isSuccessShow;

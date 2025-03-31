@@ -7,7 +7,7 @@ namespace Modules.SaveSystem.SaveLoad
     {
         private readonly TService _service;
 
-        public GameSerializer(TService service)
+        protected GameSerializer(TService service)
         {
             _service = service;
         }

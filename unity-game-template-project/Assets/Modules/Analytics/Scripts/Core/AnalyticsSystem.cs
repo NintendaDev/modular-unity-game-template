@@ -18,7 +18,7 @@ namespace Modules.Analytics
         private readonly HashSet<AnalyticsEventCode> _sendedEventsCodes = new();
         private CustomAnalyticsEventsHub _hub;
 
-        public AnalyticsSystem(ILogSystem logSystem, IStaticDataService staticDataService)
+        protected AnalyticsSystem(ILogSystem logSystem, IStaticDataService staticDataService)
         {
             LogSystem = new TemplateLogger(logSystem);
             _staticDataService = staticDataService;
