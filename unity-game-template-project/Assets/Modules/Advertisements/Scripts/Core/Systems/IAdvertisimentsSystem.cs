@@ -8,9 +8,11 @@ namespace Modules.Advertisements.Systems
     {
         public event Action<AdvertisementRevenue> RevenueReceived;
         
-        public AdvertisementsSystemType SystemType { get; }
+        public Types.AdvertisementsSystemType Type { get; }
         
         public bool IsShowInterstitialOrReward { get; }
+        
+        public bool CanShowBanner { get; }
 
         public bool CanShowInterstitial { get; }
 
@@ -19,6 +21,8 @@ namespace Modules.Advertisements.Systems
         public UniTask InitializeAsync();
 
         public void DisableInterstitial();
+        
+        public void DisableBanner();
 
         public bool TryShowBanner();
         

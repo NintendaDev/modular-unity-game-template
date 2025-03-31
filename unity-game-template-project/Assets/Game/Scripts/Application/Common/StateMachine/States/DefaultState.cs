@@ -11,7 +11,7 @@ namespace Game.Application.Common
     {
         private readonly Type _stateType;
 
-        public DefaultState(IStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem)
+        protected DefaultState(IStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem)
         {
             StateMachine = stateMachine;
             LogSystem = logSystem;

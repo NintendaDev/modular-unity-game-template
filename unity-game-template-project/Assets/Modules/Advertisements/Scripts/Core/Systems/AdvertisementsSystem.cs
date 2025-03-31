@@ -8,41 +8,48 @@ using UnityEngine;
 
 namespace Modules.Advertisements.Systems
 {
-    public abstract class AdvertisementsSystem : IDisposable, IAdvertisementsSystem
+    public abstract class AdvertisementsSystem : IAdvertisementsSystem, IDisposable
     {
         private readonly AudioState _audioState = new();
-        private readonly CountdownTimer _canShowTimer = new();
-        private float _minAdvertisementShowDelay;
+        private readonly CountdownTimer _canShowInterstitialTimer = new();
+        private float _minInterstitialShowDelay;
         private bool _isEnabledInterstitial = true;
+        private bool _isEnableBanner = true;
         private bool _isInitialized;
 
         public virtual void Dispose()
         {
-            _canShowTimer.Dispose();
+            _canShowInterstitialTimer.Dispose();
         }
 
         public abstract event Action<AdvertisementRevenue> RevenueReceived;
 
         public abstract bool IsShowInterstitialOrReward { get; }
+        
+        public virtual bool CanShowBanner => _isInitialized && _isEnableBanner;
 
-        public virtual bool CanShowReward => _isInitialized && _canShowTimer.IsRunning == false;
+        public virtual bool CanShowReward => _isInitialized;
 
         public virtual bool CanShowInterstitial => _isEnabledInterstitial && _isInitialized 
-                                                                          && _canShowTimer.IsRunning == false;
+                                                                          && _canShowInterstitialTimer.IsRunning == false;
 
-        public abstract AdvertisementsSystemType SystemType { get; }
+        public abstract AdvertisementsSystemType Type { get; }
 
         public abstract UniTask InitializeAsync();
 
-        public void DisableInterstitial() =>
-            _isEnabledInterstitial = false;
-
-        public void EnableInterstitial() =>
-            _isEnabledInterstitial = true;
+        public void DisableInterstitial() => _isEnabledInterstitial = false;
+        
+        public void DisableBanner()
+        {
+            _isEnableBanner = false;
+            DestroyBanner();
+        }
 
         public abstract bool TryShowBanner();
 
         public abstract void HideBanner();
+        
+        protected abstract void DestroyBanner();
         
         public bool TryShowInterstitial(float probability, Action onCloseCallback, Action onShowCallback = null, 
             Action onClickCallback = null)
@@ -61,10 +68,8 @@ namespace Modules.Advertisements.Systems
             if (CanShowInterstitial == false)
                 return false;
             
-            _canShowTimer.Start(_minAdvertisementShowDelay);
-            
-            StartInterstitialBehaviour(onCloseCallback: onCloseCallback, onShowCallback: onShowCallback, 
-                onClickCallback: onClickCallback);
+            StartInterstitialBehaviour(onCloseCallback: CreateCallbackWithInterstitialTimer(onCloseCallback), 
+                onShowCallback: onShowCallback, onClickCallback: onClickCallback);
 
             return true;
         }
@@ -76,16 +81,15 @@ namespace Modules.Advertisements.Systems
             if (CanShowReward == false)
                 return false;
             
-            _canShowTimer.Start(_minAdvertisementShowDelay);
-            
-            StartRewardBehaviour(onSuccessCallback: onSuccessCallback, onCloseCallback: onCloseCallback, 
+            StartRewardBehaviour(onSuccessCallback: onSuccessCallback, 
+                onCloseCallback: CreateCallbackWithInterstitialTimer(onCloseCallback), 
                 onShowCallback: onShowCallback, onClickCallback: onClickCallback);
 
             return true;
         }
         
         protected void SetMinAdvertisementShowDelay(float minAdvertisementShowDelay) =>
-            _minAdvertisementShowDelay = minAdvertisementShowDelay;
+            _minInterstitialShowDelay = minAdvertisementShowDelay;
 
         protected void SetInitializeFlag() => _isInitialized = true;
         
@@ -99,9 +103,19 @@ namespace Modules.Advertisements.Systems
 
         protected void DisableSound() => _audioState.Off();
 
+        private Action CreateCallbackWithInterstitialTimer(Action sourceCallback)
+        {
+            return () =>
+            {
+                _canShowInterstitialTimer.Start(_minInterstitialShowDelay);
+                sourceCallback?.Invoke();
+            };
+        }
+
         private sealed class AudioState
         {
             private float _originalAudioVolume;
+            private float _originalTimeScale;
             private bool _isOffState;
 
             public void On()
