@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Game.Gameplay.View.UI;
-using Modules.Analytics;
 using Modules.AudioManagement.Player;
 using Modules.Core.Systems;
 using Modules.EventBus;
@@ -15,7 +15,7 @@ namespace Game.Gameplay.States
     public sealed class PauseSceneState : LevelSceneState
     {
         public PauseSceneState(SceneStateMachine stateMachine, ILogSystem logSystem,
-            ISignalBus signalBus, IAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
+            ISignalBus signalBus, TemplateAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
             IEnumerable<IReset> resetObjects, ILoadingCurtain loadingCurtain, 
             ICurrentLevelConfiguration levelConfigurator)
             : base(stateMachine, signalBus, logSystem, analyticsSystem, audioAssetPlayer, 

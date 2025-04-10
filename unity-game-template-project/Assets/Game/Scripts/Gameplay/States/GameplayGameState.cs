@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Modules.LoadingCurtain;
@@ -11,13 +12,15 @@ namespace Game.Gameplay.States
     {
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly IFastLoadLevel _levelLoader;
+        private readonly TemplateAnalyticsSystem _analyticsSystem;
 
         public GameplayGameState(GameStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem,
-            ILoadingCurtain loadingCurtain, IFastLoadLevel levelLoader) 
+            ILoadingCurtain loadingCurtain, IFastLoadLevel levelLoader, TemplateAnalyticsSystem analyticsSystem) 
             : base(stateMachine, signalBus, logSystem)
         {
             _loadingCurtain = loadingCurtain;
             _levelLoader = levelLoader;
+            _analyticsSystem = analyticsSystem;
         }
 
         public override async UniTask Enter()
@@ -25,7 +28,10 @@ namespace Game.Gameplay.States
             await base.Enter();
 
             _loadingCurtain.ShowWithoutProgressBar();
+            
+            _analyticsSystem.SendLevelLoadEvent(LevelBootStage.SceneLoad, _levelLoader.FastLoadLevelCode);
             await _levelLoader.FastLoadLevelAsync();
+            
             _loadingCurtain.Hide();
         }
     }

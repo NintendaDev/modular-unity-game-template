@@ -20,6 +20,8 @@ namespace Game.Application.LevelLoading
 
         public LevelConfiguration CurrentLevelConfiguration { get; private set; }
 
+        public LevelCode FastLoadLevelCode => _levelCodeForFastLoading;
+
         public async UniTask FastLoadLevelAsync() =>
             await LoadLevelAsync(_levelCodeForFastLoading);
 

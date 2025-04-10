@@ -1,4 +1,5 @@
-﻿using Modules.Analytics;
+﻿using Game.Application.Analytics;
+using Modules.Analytics;
 using Modules.Analytics.GA;
 using Modules.Analytics.Stub;
 using Zenject;
@@ -15,6 +16,10 @@ namespace Game.Application.Bootstrap
                     return new ParallelAnalyticsSystem(context.Container.Instantiate<GameAnalyticsSystem>(),
                         context.Container.Instantiate<StubAnalyticsSystem>());
                 })
+                .AsSingle()
+                .WhenInjectedInto<TemplateAnalyticsSystem>();
+            
+            Container.BindInterfacesAndSelfTo<TemplateAnalyticsSystem>()
                 .AsSingle();
         }
     }
