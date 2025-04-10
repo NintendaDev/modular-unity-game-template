@@ -113,6 +113,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - configurations
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdbed0e5fe073374e9ce66fd39e145e7
+    m_Address: Assets/Modules/Analytics/Configurations/AnalyticsEventsNames.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - configurations
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 76321b1bbea0af144be732232186accb, type: 2}
   m_SchemaSet:

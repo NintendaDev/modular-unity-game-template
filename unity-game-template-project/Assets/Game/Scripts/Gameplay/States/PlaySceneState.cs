@@ -1,11 +1,11 @@
 using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Game.Gameplay.View.UI;
 using GameTemplate.Gameplay.Content;
-using Modules.Analytics;
 using Modules.AudioManagement.Player;
 using Modules.AudioManagement.Types;
 using Modules.Core.Systems;
@@ -17,7 +17,7 @@ namespace Game.Gameplay.States
     public sealed class PlaySceneState : LevelSceneState
     {
         public PlaySceneState(SceneStateMachine stateMachine, ISignalBus signalBus,
-            ILogSystem logSystem, IAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
+            ILogSystem logSystem, TemplateAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
             IEnumerable<IReset> resetObjects, ILoadingCurtain loadingCurtain, 
             ICurrentLevelConfiguration levelConfigurator)
             : base(stateMachine, signalBus, logSystem, analyticsSystem, audioAssetPlayer, resetObjects, 
@@ -27,6 +27,8 @@ namespace Game.Gameplay.States
 
         public override async UniTask Enter()
         {
+            AnalyticsSystem.SendLevelLoadEvent(LevelBootStage.Complete, CurrentLevelConfiguration.LevelCode);
+            
             await base.Enter();
 
             StateSignalBus.Subscribe<UIPauseSignal>(OnUIPauseSignal);

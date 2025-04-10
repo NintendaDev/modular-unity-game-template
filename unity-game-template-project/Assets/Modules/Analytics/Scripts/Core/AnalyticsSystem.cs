@@ -26,13 +26,13 @@ namespace Modules.Analytics
 
         protected TemplateLogger LogSystem { get; }
 
-        protected DefaultAnalyticsParamsNames DefaultParamsNames { get; private set; }
+        protected AnalyticsParamsNames ParamsNames { get; private set; }
 
         public virtual UniTask InitializeAsync()
         {
             _hub = _staticDataService.GetConfiguration<CustomAnalyticsEventsHub>();
 
-            DefaultParamsNames = _staticDataService.GetConfiguration<DefaultAnalyticsParamsNames>();
+            ParamsNames = _staticDataService.GetConfiguration<AnalyticsParamsNames>();
 
             return UniTask.CompletedTask;
         }

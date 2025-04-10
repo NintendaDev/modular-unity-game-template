@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 15401ceead4812a43ab87695f0765343
-  m_SerializeEntries:
-  - m_GUID: 71841beb4bdb9f04e8d569c055773b7b
-    m_Address: Assets/Game/Scenes/Levels/Level02.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 76321b1bbea0af144be732232186accb, type: 2}
   m_SchemaSet:

@@ -15,7 +15,7 @@ MonoBehaviour:
   _levelCode: 2
   _title: Second Level
   _scene:
-    m_AssetGUID: 71841beb4bdb9f04e8d569c055773b7b
+    m_AssetGUID: e7d1bc14acb48439fa7885467f8902c4
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1

@@ -2,10 +2,10 @@ using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
 using Game.Application.Advertisements;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Modules.Advertisements.Types;
-using Modules.Analytics;
 using Modules.AudioManagement.Player;
 using Modules.Core.Systems;
 using Modules.EventBus;
@@ -18,13 +18,13 @@ namespace Game.Gameplay.States
         private readonly AdvertisementsFacade _advertisementsFacade;
 
         public StartSceneState(SceneStateMachine stateMachine, ILogSystem logSystem,
-            ISignalBus signalBus, IAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
+            ISignalBus signalBus, TemplateAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, 
             IEnumerable<IReset> resetObjects, ILoadingCurtain loadingCurtain, 
-            ICurrentLevelConfiguration levelConfigurator, AdvertisementsFacade _advertisementsFacade)
+            ICurrentLevelConfiguration levelConfigurator, AdvertisementsFacade advertisementsFacade)
             : base(stateMachine, signalBus, logSystem, analyticsSystem, audioAssetPlayer, resetObjects, 
                   loadingCurtain, levelConfigurator)
         {
-            this._advertisementsFacade = _advertisementsFacade;
+            _advertisementsFacade = advertisementsFacade;
         }
 
         public override async UniTask Enter()
@@ -33,6 +33,8 @@ namespace Game.Gameplay.States
 
             ShowCurtain();
             ResetGameplay();
+            
+            AnalyticsSystem.SendLevelLoadEvent(LevelBootStage.ShowAdvertisement, CurrentLevelConfiguration.LevelCode);
 
             if (_advertisementsFacade.TryShowInterstitial(AdvertisementPlacement.StartLevel,
                     onCloseCallback: OnInterstitialFinished) == false)
@@ -41,10 +43,8 @@ namespace Game.Gameplay.States
             }
         }
 
-        private async void OnInterstitialFinished() =>
-            await SwitchNextState();
+        private async void OnInterstitialFinished() => await SwitchNextState();
 
-        private async UniTask SwitchNextState() =>
-            await SwitchPlayState();
+        private async UniTask SwitchNextState() => await SwitchPlayState();
     }
 }

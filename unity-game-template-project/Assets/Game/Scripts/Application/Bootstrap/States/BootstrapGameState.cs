@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Game.Application.Loading;
@@ -20,13 +21,13 @@ namespace Game.Application.Bootstrap
         private readonly ILevelLoaderService _gameLevelLoaderService;
         private readonly IAudioMixerSystem _audioMixerSystem;
         private readonly ILocalizationSystem _localizationSystem;
-        private readonly IAnalyticsSystem _analyticsSystem;
+        private readonly TemplateAnalyticsSystem _analyticsSystem;
         private readonly SystemPerformanceSetter _performanceSetter;
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly IPerformaceConfiguration _devicePerformaceConfigurator;
 
         public BootstrapGameState(GameStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem, 
-            IAnalyticsSystem analyticsSystem, IStaticDataService staticDataService, 
+            TemplateAnalyticsSystem analyticsSystem, IStaticDataService staticDataService, 
             ILevelLoaderService gameLevelLoaderService, IAudioMixerSystem audioMixerSystem, 
             IPerformaceConfiguration devicePerformaceConfigurator, ILocalizationSystem localizationSystem, 
             SystemPerformanceSetter performanceSetter, ILoadingCurtain loadingCurtain)
@@ -56,6 +57,9 @@ namespace Game.Application.Bootstrap
         {
             await _staticDataService.InitializeAsync();
             await _analyticsSystem.InitializeAsync();
+            
+            _analyticsSystem.SendGameBootEvent(GameBootStage.Bootstrap);
+            
             _devicePerformaceConfigurator.Initialize();
             _performanceSetter.Initialize();
             _gameLevelLoaderService.Initialize();

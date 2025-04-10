@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
 using Game.Application.Advertisements;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.GameHub;
 using Game.Application.LevelLoading;
@@ -21,7 +22,7 @@ namespace Game.Gameplay.States
         private readonly AdvertisementsFacade _advertisementsFacade;
 
         public FinishSceneState(GameStateMachine gameStateMachine, SceneStateMachine sceneStateMachine, 
-            ISignalBus signalBus, ILogSystem logSystem, IAnalyticsSystem analyticsSystem, 
+            ISignalBus signalBus, ILogSystem logSystem, TemplateAnalyticsSystem analyticsSystem, 
             IAudioAssetPlayer audioAssetPlayer, IEnumerable<IReset> resetObjects, ILoadingCurtain loadingCurtain, 
             ICurrentLevelConfiguration levelConfigurator, AdvertisementsFacade advertisementsFacade)
             : base(sceneStateMachine, signalBus, logSystem, analyticsSystem, audioAssetPlayer, resetObjects, 

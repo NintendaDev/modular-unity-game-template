@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Modules.LoadingCurtain;
 using System.Collections.Generic;
+using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using UnityEngine;
-using Modules.Analytics;
 using Modules.AudioManagement.Player;
 using Modules.AudioManagement.Types;
 using Modules.Core.Systems;
@@ -20,7 +20,7 @@ namespace Game.Gameplay.States
         private readonly ILoadingCurtain _loadingCurtain;
 
         protected LevelSceneState(SceneStateMachine stateMachine, ISignalBus signalBus, ILogSystem logSystem,
-            IAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, IEnumerable<IReset> resetObjects, 
+            TemplateAnalyticsSystem analyticsSystem, IAudioAssetPlayer audioAssetPlayer, IEnumerable<IReset> resetObjects, 
             ILoadingCurtain loadingCurtain, ICurrentLevelConfiguration levelConfigurator) 
             : base(stateMachine, signalBus, logSystem)
         {
@@ -31,12 +31,12 @@ namespace Game.Gameplay.States
             CurrentLevelConfiguration = levelConfigurator.CurrentLevelConfiguration;
             AnalyticsSystem = analyticsSystem;
         }
-
-        protected IAudioAssetPlayer AudioAssetPlayer { get; private set; }
-
+        
         protected LevelConfiguration CurrentLevelConfiguration { get; private set; }
-
-        protected IAnalyticsSystem AnalyticsSystem { get; private set; }
+        
+        protected TemplateAnalyticsSystem AnalyticsSystem { get; private set; }
+        
+        private IAudioAssetPlayer AudioAssetPlayer { get; }
 
         protected void ResetGameplay()
         {
