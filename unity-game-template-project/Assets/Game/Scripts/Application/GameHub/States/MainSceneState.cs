@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Application.Advertisements;
 using Game.Application.Common;
-using Game.Application.GameHub.UI;
 using Game.Application.LevelLoading;
 using Modules.AudioManagement.Mixer;
 using Modules.AudioManagement.Player;

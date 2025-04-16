@@ -10,7 +10,7 @@ using Modules.Localization.Core.Processors;
 using Modules.ObjectsManagement.Factories;
 using Zenject;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class LevelViewFactory : IDisposable
     {

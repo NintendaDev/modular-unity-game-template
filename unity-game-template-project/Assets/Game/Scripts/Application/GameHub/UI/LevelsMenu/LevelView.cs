@@ -3,7 +3,7 @@ using Game.Application.Common;
 using Modules.Core.Systems;
 using Modules.Core.UI;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class LevelView : UITextButton, IDestroyEvent
     {
