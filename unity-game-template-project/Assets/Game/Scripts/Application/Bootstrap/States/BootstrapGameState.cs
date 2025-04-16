@@ -3,7 +3,6 @@ using Game.Application.Analytics;
 using Game.Application.Common;
 using Game.Application.LevelLoading;
 using Game.Application.Loading;
-using Modules.Analytics;
 using Modules.AssetsManagement.StaticData;
 using Modules.AudioManagement.Mixer;
 using Modules.Device.Performance;

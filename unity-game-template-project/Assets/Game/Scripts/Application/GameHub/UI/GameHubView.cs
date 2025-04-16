@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class GameHubView : MonoBehaviour
     {

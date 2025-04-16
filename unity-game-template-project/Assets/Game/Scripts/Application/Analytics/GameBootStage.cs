@@ -5,7 +5,7 @@
         Bootstrap,
         DownloadAccountInfo,
         LoadProgress,
-        GamehubBootstrap,
+        GameHubBootstrap,
         MainMenu,
     }
 }

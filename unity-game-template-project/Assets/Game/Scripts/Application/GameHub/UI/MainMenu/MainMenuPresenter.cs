@@ -2,7 +2,7 @@ using System;
 using Modules.Authorization.Interfaces;
 using Modules.EventBus;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class MainMenuPresenter : IDisposable
     {

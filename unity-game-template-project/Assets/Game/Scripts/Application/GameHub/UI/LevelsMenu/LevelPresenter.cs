@@ -1,7 +1,7 @@
 using System;
 using Modules.EventBus;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class LevelPresenter : IDisposable
     {

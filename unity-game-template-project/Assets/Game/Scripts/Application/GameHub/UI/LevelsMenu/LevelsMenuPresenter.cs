@@ -4,7 +4,7 @@ using System.Threading;
 using Game.Application.Common;
 using Modules.AssetsManagement.StaticData;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class LevelsMenuPresenter
     {

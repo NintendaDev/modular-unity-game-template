@@ -1,7 +1,7 @@
 using Game.Application.Common;
 using Modules.EventBus;
 
-namespace Game.Application.GameHub.UI
+namespace Game.Application.GameHub
 {
     public sealed class LevelLoadSignal : IPayloadSignal
     {

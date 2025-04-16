@@ -1,8 +1,4 @@
 ﻿using Game.Application.Common;
-using Game.Gameplay.Content;
-using Game.Gameplay.States;
-using GameTemplate.Systems.Input;
-using GameTemplate.Gameplay.Content;
 using Modules.Entities;
 using Modules.SimplePlatformer.Input;
 using Sirenix.OdinInspector;

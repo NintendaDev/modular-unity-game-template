@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Application.Common;
-using Game.Gameplay.States;
+using Game.Gameplay.GameContext;
 using Modules.EventBus;
 using Modules.LoadingCurtain;
 using Modules.Logging;

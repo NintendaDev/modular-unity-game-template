@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using Game.Application.Common;
 using Game.Application.GameHub;
 using Game.Application.Loading;
-using Game.Gameplay.States;
+using Game.Gameplay.GameContext;
 using Modules.StateMachines;
 using UnityEngine;
 using Zenject;

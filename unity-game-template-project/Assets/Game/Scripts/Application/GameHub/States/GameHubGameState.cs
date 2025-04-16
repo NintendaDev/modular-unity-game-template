@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Application.Bootstrap;
 using Game.Application.Common;
-using Game.Application.LevelLoading;
 using Modules.SceneManagement;
 using Modules.LoadingCurtain;
 using Modules.EventBus;
